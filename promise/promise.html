@@ -1,19 +1,37 @@
 <!--
- * @Author: your name
+ * @Author: Hjm
+ * @LastEditors: Hjm
  * @Date: 2020-10-20 09:18:10
- * @LastEditTime: 2020-10-20 09:34:52
- * @LastEditors: Please set LastEditors
- * @Description: In User Settings Edit
- * @FilePath: \_exercise\promise.html
+ * @LastEditTime: 2020-10-20 10:49:17
+ * @FilePath: \_exercise\promise\promise.html
 -->
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>promise源码实现</title>
 </head>
+
 <body>
-    
+
 </body>
+<script src="./promise.js"></script>
+<script>
+    
+    let mp = new myPromise((resolve, reject) => {
+        if (1 == 1) {
+            resolve('resolve');
+        } else {
+            reject('reject');
+        }
+    });
+    mp.then(()=>{
+        console.log('then');
+    })
+    console.log(mp);
+</script>
+
 </html>

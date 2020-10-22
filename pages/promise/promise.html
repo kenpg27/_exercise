@@ -20,15 +20,16 @@
 </body>
 <script src="./promise.js"></script>
 <script>
-    
-    let mp = new KenPromise((resolve, reject) => {
-        if (1 == 1) {
-            resolve('resolve');
-        } else {
-            reject('reject');
-        }
-    });
-    mp.then(()=>{
+
+    let mp =
+        new KenPromise((resolve, reject) => {
+            if (1 == 1) {
+                resolve('resolve');
+            } else {
+                reject('reject');
+            }
+        });
+    mp.then(() => {
         console.log('then');
     })
     console.log(mp);

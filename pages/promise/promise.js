@@ -164,16 +164,16 @@ class KenPromise {
     then(onFulfilled, onRejected) {
         onFulfilled =
             typeof onFulfilled === "function" ?
-            onFulfilled :
-            function (value) {
-                return value;
-            };
+                onFulfilled :
+                function (value) {
+                    return value;
+                };
         onRejected =
             typeof onRejected === "function" ?
-            onRejected :
-            function (reason) {
-                throw reason;
-            };
+                onRejected :
+                function (reason) {
+                    throw reason;
+                };
 
         return new KenPromise((resolve, reject) => {
             if (this.state === "fulfilled") {

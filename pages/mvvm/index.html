@@ -2,8 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-22 09:25:48
- * @LastEditTime: 2020-10-22 11:53:14
- * @FilePath: \_exercise\pages\mvvm\index.html
+ * @LastEditTime: 2020-10-23 17:30:24
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -23,22 +22,12 @@
   <script src="./compile.js"></script>
   <script src="./mvvm.js"></script>
   <script>
-    const vm = new Vue({
-      el: "#app",
-      data() {
-        return {
-          mvvm: "mvvm",
-          textValue: "",
-        };
-      },
-    });
-
     const mvvm = new Mvvm({
       el: "#app",
       data() {
         return {
           mvvm: "mvvm",
-          textValue: "",
+          textValue: "mvvm2",
         };
       },
     });

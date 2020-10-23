@@ -2,6 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-22 11:52:26
+<<<<<<< HEAD
  * @LastEditTime: 2020-10-23 17:31:35
  */
 class Compile {
@@ -48,5 +49,12 @@ class Compile {
         }
         return fragment; // 内存中的节点
     }
+=======
+ * @LastEditTime: 2020-10-22 17:05:26
+ */
+class Compile {
+    constructor(params) {
+>>>>>>> 55589e6dfe26a539dac888ae8780b6117372ee0e
 
+    }
 }

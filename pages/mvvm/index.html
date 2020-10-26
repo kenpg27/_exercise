@@ -2,7 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-22 09:25:48
- * @LastEditTime: 2020-10-23 17:30:24
+ * @LastEditTime: 2020-10-26 16:51:11
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -14,8 +14,8 @@
 
   <body>
     <div id="app">
-      <span>{{mvvm}}</span>
-      <input type="text" v-model="textValue" />
+      <span>{{mvvm}}{{text_2.value}}</span>
+      <input type="text" v-model="textValue.value" />
     </div>
   </body>
   <script src="../../node_modules/vue/dist/vue.js"></script>
@@ -24,11 +24,19 @@
   <script>
     const mvvm = new Mvvm({
       el: "#app",
-      data() {
-        return {
-          mvvm: "mvvm",
-          textValue: "mvvm2",
-        };
+      data: {
+        mvvm: "mvvm_value",
+        text_2: {
+          value: "text_2_value",
+        },
+        textValue: {
+          value: "v-model_value",
+        },
+      },
+      methods: {
+        showModal() {
+          alert("showModal");
+        },
       },
     });
   </script>

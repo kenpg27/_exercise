@@ -2,11 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-22 09:26:09
-<<<<<<< HEAD
- * @LastEditTime: 2020-10-23 16:47:48
-=======
- * @LastEditTime: 2020-10-22 17:00:04
->>>>>>> 55589e6dfe26a539dac888ae8780b6117372ee0e
+ * @LastEditTime: 2020-10-26 09:49:51
  */
 class Mvvm {
     constructor(options) {

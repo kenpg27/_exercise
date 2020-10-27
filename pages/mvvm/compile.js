@@ -2,7 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-22 11:52:26
- * @LastEditTime: 2020-10-26 16:52:34
+ * @LastEditTime: 2020-10-27 15:51:09
  */
 class Compile {
     constructor(el, vm) {
@@ -45,10 +45,10 @@ class Compile {
             let attrname = attr.name;
             if (this.isDiretive(attrname)) {
                 // v-model v-click @click 等等
-                console.log(attrname);
+                // console.log(attrname);
                 // 截取指令
                 attrname = attrname.slice(2);
-                console.log(attrname);
+                // console.log(attrname);
                 this.compileUtils[attrname](node, this.$vm, attr.value);
             }
         });
@@ -60,7 +60,7 @@ class Compile {
         let reg = /\{\{([^}]+)\}\}/g;
         if (reg.test(expr)) {
             // 这里要求将data的数据替换指令
-            console.log(expr);
+            // console.log(expr);
             this.compileUtils['text'](node, this.$vm, expr);
         }
     }
@@ -85,10 +85,10 @@ class Compile {
             // 这里的expr是包含{{}} ，先要过滤{{}}
             let value = this.getTextVal(vm, expr);
             this.updater.textUpdater(node, value);
-            console.log(value);
+            // console.log(value);
         },
         model(node, vm, expr) {
-            console.log(expr);
+            // console.log(expr);
             let value = this.getVal(vm, expr);
             this.updater.modelUpdater(node, value);
         },

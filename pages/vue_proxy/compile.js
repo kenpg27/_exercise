@@ -2,7 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-28 16:39:51
- * @LastEditTime: 2020-10-28 17:27:39
+ * @LastEditTime: 2020-10-28 17:28:56
  */
 class Compile {
     constructor(fragment, vm) {
@@ -12,6 +12,6 @@ class Compile {
         vm.$el.appendChild(this.$fragment);
     }
     _compile(fragment) {
-        console.log(fragment);
+        console.log(fragment222);
     }
 }

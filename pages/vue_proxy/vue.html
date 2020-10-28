@@ -1,0 +1,61 @@
+<!--
+ * @Author: Hjm
+ * @LastEditors: Hjm
+ * @Date: 2020-10-28 16:04:06
+ * @LastEditTime: 2020-10-28 17:16:34
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue_proxy双向绑定</title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="num" />
+      <input type="button" value="增加" v-click="add" />
+      <input type="button" value="减去" v-click="sub" />
+      <div v-bind="num"></div>
+    </div>
+  </body>
+  <script src="compile.js"></script>
+  <script>
+    class Vue {
+      constructor(options) {
+        this.$el = document.querySelector(options.el);
+        this.$data = options.data;
+        this.$methods = options.methods;
+        if (this.$el) {
+          this.$fragment = this.nodesToFragment(this.$el);
+          console.log(this.$fragment);
+          new Compile(this.$fragment, this);
+        }
+      }
+      nodesToFragment(root) {
+        // 获取node下面的所有节点
+        let fragment = document.createDocumentFragment();
+        let child;
+        while ((child = root.firstChild)) {
+          fragment.append(child);
+        }
+        return fragment;
+      }
+    }
+
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        num: 0,
+      },
+      methods: {
+        add() {
+          this.num++;
+        },
+        sub() {
+          this.num--;
+        },
+      },
+    });
+  </script>
+</html>

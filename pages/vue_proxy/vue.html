@@ -2,7 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-28 16:04:06
- * @LastEditTime: 2020-10-28 17:16:34
+ * @LastEditTime: 2020-10-29 15:15:43
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -13,12 +13,17 @@
   </head>
   <body>
     <div id="app">
-      <input type="text" v-model="num" />
-      <input type="button" value="增加" v-click="add" />
-      <input type="button" value="减去" v-click="sub" />
-      <div v-bind="num"></div>
+      这是一段文本呢{{text.value}}{{total}}，用于匹配。
+      <div>
+        <input type="text" v-model="num" />
+        <input type="button" value="增加" v-click="add" />
+        <input type="button" value="减去" v-click="sub" />
+        <div v-bind="num"></div>
+        <div>{{total}}</div>
+      </div>
     </div>
   </body>
+  <script src="watcher.js"></script>
   <script src="compile.js"></script>
   <script>
     class Vue {
@@ -28,7 +33,7 @@
         this.$methods = options.methods;
         if (this.$el) {
           this.$fragment = this.nodesToFragment(this.$el);
-          console.log(this.$fragment);
+          // console.log(this.$fragment);
           new Compile(this.$fragment, this);
         }
       }
@@ -47,6 +52,10 @@
       el: "#app",
       data: {
         num: 0,
+        total: 0,
+        text: {
+          value: "i am text",
+        },
       },
       methods: {
         add() {

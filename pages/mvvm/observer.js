@@ -2,7 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-27 11:22:51
- * @LastEditTime: 2020-10-27 17:23:22
+ * @LastEditTime: 2020-10-27 19:37:53
  */
 class Observer {
     constructor(data) {
@@ -19,7 +19,6 @@ class Observer {
             this.defineReactive(data, key, data[key]);
             this.observer(data[key]); // 深度递归劫持
         });
-
     }
 
     defineReactive(obj, key, value) {
@@ -28,7 +27,7 @@ class Observer {
             enumerable: true,
             configurable: true,
             get: () => {
-                //console.log(key, value);
+                // console.log(key, value);
                 return value;
             },
             set: (newValue) => {

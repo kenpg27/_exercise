@@ -1,0 +1,34 @@
+<!--
+ * @Author: Hjm
+ * @LastEditors: Hjm
+ * @Date: 2020-10-27 21:55:58
+ * @LastEditTime: 2020-10-27 22:36:36
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proxy</title>
+  </head>
+  <body></body>
+  <script>
+    let obj = {
+      text: "abc",
+      child_obj: {
+        text: "child_abc",
+      },
+      child_arr: [{ first: 1 }, { second: 2 }],
+    };
+    let handler = {
+      get: (target, property) => {
+        console.log(target, property);
+        return;
+      },
+      set: () => {},
+    };
+    let proxy = new Proxy(obj, handler);
+
+    console.log(proxy.name);
+  </script>
+</html>

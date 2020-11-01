@@ -1,8 +1,6 @@
-/*
- * @Author: Hjm
- * @LastEditors: Hjm
- * @Date: 2020-10-28 16:39:51
- * @LastEditTime: 2020-10-29 15:21:23
+/**
+ * @description: 实现对模板的编译，提取指令并将vm与视图关联起来
+ * @author: Hjm
  */
 let $$id;
 class Compile {
@@ -42,9 +40,10 @@ class Compile {
     }
     // 绑定监听者
     bindWatcher(node, scope, exp, dir, prop) {
-        //添加一个Watcher，监听exp相关的所有字段变化
+        //添加一个Watcher，监听exp相关的所有字段变化，如果变化则执行updteFn
         let updateFn = updater[dir];
         let watcher = new Watcher(exp, scope, function (newVal) {
+            console.log(newVal);
             updateFn && updateFn(node, newVal, prop);
         });
     }

@@ -15,6 +15,7 @@ class Dep {
     }
 
     notify(options) {
+        console.log(this.subs);
         for (var uid in this.subs) {
             this.subs[uid].update(options);
         }

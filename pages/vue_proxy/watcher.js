@@ -7,13 +7,14 @@ class Watcher {
     constructor(exp, scope, fn) {
         this.exp = exp;
         this.scope = scope;
-        this.fn = fn || function () {};
+        this.fn = fn || function () { };
         this.value = null;
         this.uid = $uid++;
         this.update();
     }
     get() {
         Dep.target = this;
+        // console.log(this.scope);
         var value = computeExpression(this.exp, this.scope); //执行的时候添加监听
         // 在parseExpression的时候，with + eval会将表达式中的变量绑定到vm模型中，在求值的时候会调用相应变量的getter事件。
         // 由于设置了Dep.target，所以会执行observer的add.sub方法，从而创建了一个依赖链。
@@ -21,15 +22,14 @@ class Watcher {
         return value;
     }
     update(options) {
-        console.log('update');
-        let newValue = this.get();
-        console.log(newValue);
-        console.log(this.value);
-        // 这里有可能是对象/数组，所以不能直接比较，可以借助JSON来转换成字符串对比
-        if (!isEqual(this.value, newValue)) {
-            this.fn && this.fn(newValue, this.value, options);
-            this.value = deepCopy(newValue);
-        }
+        setTimeout(() => {
+            let newValue = this.get();
+            // 这里有可能是对象/数组，所以不能直接比较，可以借助JSON来转换成字符串对比
+            if (!isEqual(this.value, newValue)) {
+                this.fn && this.fn(newValue, this.value, options);
+                this.value = deepCopy(newValue);
+            }
+        })
     }
 }
 /**
@@ -41,7 +41,7 @@ class Watcher {
  */
 function computeExpression(exp, scope) {
     try {
-        with(scope) {
+        with (scope) {
             return eval(exp);
         }
     } catch (error) {
@@ -55,8 +55,8 @@ function computeExpression(exp, scope) {
 function isEqual(a, b) {
     return a == b || (
         isObject(a) && isObject(b) ?
-        JSON.stringify(a) === JSON.stringify(b) :
-        false
+            JSON.stringify(a) === JSON.stringify(b) :
+            false
     )
 }
 

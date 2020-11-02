@@ -22,7 +22,6 @@ class Observer {
         // Object.keys(data).forEach(function (key) {
         // 	self.observeObject(data, key, data[key]);
         // });
-        // vm.$data['test'] = 'test';
     }
     /**
      * @description: Proxy的代理针对的是整个对象，而不是像Object.defineProperty针对某个属性。只需做一层代理就可以监听同级结构下的所有属性变化，包括新增属性和删除属性
@@ -47,8 +46,8 @@ class Observer {
                 return Reflect.get(target, key)
             },
             set(target, key, value) {
-                console.log(key);
-                console.log(value);
+                // console.log(key);
+                // console.log(value);
                 if (key === 'length') return true
                 dep.notify(); // 通知订阅者更新
                 return Reflect.set(target, key, value);

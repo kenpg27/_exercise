@@ -43,7 +43,7 @@ class Compile {
         //添加一个Watcher，监听exp相关的所有字段变化，如果变化则执行updteFn
         let updateFn = updater[dir];
         let watcher = new Watcher(exp, scope, function (newVal) {
-            console.log(newVal);
+            // console.log(newVal);
             updateFn && updateFn(node, newVal, prop);
         });
     }
@@ -51,7 +51,7 @@ class Compile {
 
 let updater = {
     text: (node, newVal) => {
-        console.log(newVal);
+        // console.log(newVal);
         node.textContent = typeof newVal === 'undefined' ? '' : newVal;
     }
 }

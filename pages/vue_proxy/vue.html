@@ -10,9 +10,14 @@
       这是一段文本呢{{text.value}}{{total}}，用于匹配。
       <div>
         <input type="text" v-model="num" />
-        <input type="button" value="增加" v-click="add" />
-        <input type="button" value="减去" v-click="sub" />
-        <div>{{total}}</div>
+        <input type="button" value="增加" @click="add" />
+        <input type="button" value="减去" @click="sub" />
+        <div>
+          {{total}}
+          <div>
+            <input type="text" v-model="total" />
+          </div>
+        </div>
       </div>
       这是数组data文本 {{v_array[0].text}}
     </div>

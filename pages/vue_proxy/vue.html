@@ -115,7 +115,10 @@
       vm.$data.total = 100;
       vm.$data.text.value = "i am text too";
       vm.$data.v_array[0].text = "i am array text too";
-      console.log(vm);
+
+      vm["testNewAttr"] = "testNewAttr";
+      vm["testNewAttr"]["value"] = "testNewAttrValue";
+      console.log(vm.testNewAttr.value);
     }, 1000);
   </script>
 </html>

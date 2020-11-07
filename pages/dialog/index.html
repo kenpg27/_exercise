@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>dialog</title>
+  </head>
+  <style>
+    .dialog-box {
+      position: fixed;
+      width: 50%;
+      left: 25%;
+      height: auto;
+      top: 15%;
+      border: 1px solid #e5e5e5;
+      border-radius: 5px;
+      z-index: 100;
+    }
+    .dialog-box .title {
+      padding: 15px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .dialog-box .content {
+      padding: 15px;
+      font-size: 14px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .dialog-box .btns {
+      padding: 15px;
+      text-align: right;
+    }
+    .dialog-box .btns .confirm {
+      margin-right: 10px;
+    }
+  </style>
+  <body>
+    <button onclick="show()">弹出</button>
+  </body>
+</html>
+<script src="dialog.js"></script>
+<script>
+  function show() {
+    let dialog = new Dialog({
+      title: "消息提示",
+      content: "此操作将不可逆转，确定删除此项？",
+      btns: ["确定", "取消"],
+      confirm: function (res) {
+        console.log(res);
+        alert("confirm");
+      },
+      cancel: function () {
+        alert("cancel");
+      },
+    });
+    dialog.show();
+  }
+</script>

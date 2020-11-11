@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手写reactivity</title>
+  </head>
+  <body></body>
+  <script src="reactivity.js"></script>
+  <script>
+    // 模仿vue3.0 实现reactive  effect 精简版代码
+    let obj = {
+      personA: {
+        name: "张三",
+        age: 28,
+      },
+      personB: {
+        name: "老四",
+        age: 35,
+      },
+    };
+    // 将对象变为响应式
+    let objRec = reactive(obj);
+
+    // 副作用打印personA
+    effect(() => {
+      console.log(objRec.personA);
+    });
+  </script>
+</html>

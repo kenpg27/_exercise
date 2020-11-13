@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手写reactive</title>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+  <script src="reactive.js"></script>
+  <script>
+    // 模仿vue3.0 实现reactive  effect 精简版代码
+    let personA = {
+      name: "张三",
+      age: 28,
+      extra: {
+        work: "coder",
+        sex: "mail",
+      },
+    };
+
+    // 将对象变为响应式
+    let objRec = reactive(personA);
+
+    // 副作用打印personA
+    effect(() => {
+      console.log(objRec.name);
+    });
+    setTimeout(() => {
+      // 修改name触发副作用
+      objRec.name = "李四";
+      objRec.extra.work = "fish";
+    }, 3000);
+  </script>
+</html>

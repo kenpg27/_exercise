@@ -1,0 +1,42 @@
+<!--
+ * @Author: Hjm
+ * @LastEditors: Hjm
+ * @Date: 2020-12-03 10:11:55
+ * @LastEditTime: 2020-12-04 09:58:03
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>reg</title>
+    </head>
+    <body>
+        <div class="content">www.baidu.com</div>
+    </body>
+    <script>
+        let str = "dajdfsd122001552"
+        // 找出字符串中的所有数字
+        // 1、非正则
+        let r = [...str].filter((item) => !Number.isNaN(parseInt(item)))
+        console.log(r.join(""))
+
+        // 2、正则
+        let r2 = str.match(/\d/g).join("")
+        console.log(r2)
+
+        // 检测用户输入匹配字符
+        // let contentDom = document.querySelector(".content");
+        // let p = prompt("请输入你要检测的内容");
+        // let reg = new RegExp(p, "g");
+        // contentDom.innerHTML = contentDom.innerHTML.replace(reg, (regStr) => {
+        //   return `<span style="color:red">${regStr}</span>`;
+        // });
+
+        // .的含义  1、除了换行符以外的所有字符  2、普通的点  需要转移 \.
+
+        // 匹配字符
+        // let web = "http://www.baidu.com网址";
+        // console.log(web.match(/[\w]+/g));
+    </script>
+</html>

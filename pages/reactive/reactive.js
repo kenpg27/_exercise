@@ -33,7 +33,7 @@ function track(target, type, key) {
       dep.add(effect);
     }
   }
-  //   console.log(targetMap);
+  //
 }
 
 /**
@@ -45,7 +45,6 @@ function track(target, type, key) {
  * @param {*} key
  */
 function trigger(target, type, key) {
-  console.log(`set value:`, key);
   // 找到对应的effect并触发
   let depsMap = targetMap.get(target);
   if (!depsMap) {
@@ -59,7 +58,7 @@ function trigger(target, type, key) {
   dep.forEach((effect) => {
     effect();
   });
-  //   console.log(dep);
+  //
 }
 
 /**
@@ -80,7 +79,7 @@ function reactive(obj) {
     get(target, key, value) {
       // 收集依赖
       track(target, "GET", key);
-      //   console.log(target[key]);
+      //
       return Reflect.get(target, key);
     },
     set(target, key, value) {

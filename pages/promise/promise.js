@@ -2,7 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-20 09:42:26
- * @LastEditTime: 2020-10-21 10:26:24
+ * @LastEditTime: 2020-12-04 10:02:06
  * @FilePath: \_exercise\promise\promise.js
  */
 
@@ -10,125 +10,125 @@
 // 2、resolve 可以将pending状态转为onFulfilled，同理~ reject 转为onRejected状态
 class KenPromise {
     static resolve(value) {
-        if (value instanceof KenPromise) return value;
+        if (value instanceof KenPromise) return value
         return new KenPromise(function (resolve, reject) {
             if (value && value.then && typeof value.then === "function") {
                 setTimeout(function () {
-                    value.then(resolve, reject);
-                });
+                    value.then(resolve, reject)
+                })
             } else {
-                resolve(value);
+                resolve(value)
             }
-        });
+        })
     }
 
     static reject(reason) {
         return new KenPromise(function (resolve, reject) {
             if (reason && reason.then && typeof reason.then === "function") {
                 setTimeout(function () {
-                    reason.then(resolve, reject);
-                });
+                    reason.then(resolve, reject)
+                })
             } else {
-                reject(reason);
+                reject(reason)
             }
-        });
+        })
     }
 
     static all(promises) {
         if (!promises || typeof promises[Symbol.iterator] !== "function")
             throw TypeError(
                 `${typeof promises} is not iterable (cannot read property Symbol(Symbol.iterator))`
-            );
-        let index = 0;
-        const result = [];
+            )
+        let index = 0
+        const result = []
         return new KenPromise(function (resolve, reject) {
-            if (!promises.length) resolve(promises);
+            if (!promises.length) resolve(promises)
             else {
                 function processValue(value, i) {
-                    result[i] = value;
+                    result[i] = value
                     if (++index === promises.length) {
-                        resolve(result);
+                        resolve(result)
                     }
                 }
                 for (let i = 0; i < promises.length; i++) {
                     KenPromise.resolve(promises[i]).then(
                         function (value) {
-                            processValue(value, i);
+                            processValue(value, i)
                         },
                         function (reason) {
-                            reject(reason);
+                            reject(reason)
                         }
-                    );
+                    )
                 }
             }
-        });
+        })
     }
 
     static race(promises) {
         if (!promises || typeof promises[Symbol.iterator] !== "function")
             throw TypeError(
                 `${typeof promises} is not iterable (cannot read property Symbol(Symbol.iterator))`
-            );
+            )
         return new KenPromise(function (resolve, reject) {
             if (!promises.length) {
-                resolve();
-                return;
+                resolve()
+                return
             }
             for (const promise of promises) {
                 KenPromise.resolve(promise).then(
                     function (value) {
-                        resolve(value);
+                        resolve(value)
                     },
                     function (reason) {
-                        reject(reason);
+                        reject(reason)
                     }
-                );
+                )
             }
-        });
+        })
     }
 
     /**
      * 终值
      * @type {*}
      */
-    value = null;
+    value = null
 
     /**
      * 据因
      * @type {string}
      */
-    reason;
+    reason
 
     /**
      * 状态
      * @type {"pending"|"fulfilled"|"rejected"}
      */
-    state = "pending";
+    state = "pending"
 
     /**
      * 异步成功回调
      * @type {Function[]}
      */
-    onFulfilledCallback = [];
+    onFulfilledCallback = []
 
     /**
      * 异步失败回调
      * @type {Function[]}
      */
-    onRejectedCallback = [];
+    onRejectedCallback = []
 
     constructor(executor) {
-        this.init();
+        this.init()
         try {
-            executor(this.resolve, this.reject);
+            executor(this.resolve, this.reject)
         } catch (e) {
-            this.reject(e);
+            this.reject(e)
         }
     }
 
     init() {
-        this.resolve = this.resolve.bind(this);
-        this.reject = this.reject.bind(this);
+        this.resolve = this.resolve.bind(this)
+        this.reject = this.reject.bind(this)
     }
 
     /**
@@ -137,12 +137,12 @@ class KenPromise {
      */
     resolve(value) {
         if (this.state === "pending") {
-            this.state = "fulfilled";
-            this.value = value;
+            this.state = "fulfilled"
+            this.value = value
 
             this.onFulfilledCallback.forEach((fn) => {
-                fn(this.value);
-            });
+                fn(this.value)
+            })
         }
     }
 
@@ -152,82 +152,82 @@ class KenPromise {
      */
     reject(reason) {
         if (this.state === "pending") {
-            this.state = "rejected";
-            this.reason = reason;
+            this.state = "rejected"
+            this.reason = reason
 
             this.onRejectedCallback.forEach((fn) => {
-                fn(this.reason);
-            });
+                fn(this.reason)
+            })
         }
     }
 
     then(onFulfilled, onRejected) {
         onFulfilled =
-            typeof onFulfilled === "function" ?
-                onFulfilled :
-                function (value) {
-                    return value;
-                };
+            typeof onFulfilled === "function"
+                ? onFulfilled
+                : function (value) {
+                      return value
+                  }
         onRejected =
-            typeof onRejected === "function" ?
-                onRejected :
-                function (reason) {
-                    throw reason;
-                };
+            typeof onRejected === "function"
+                ? onRejected
+                : function (reason) {
+                      throw reason
+                  }
 
         return new KenPromise((resolve, reject) => {
             if (this.state === "fulfilled") {
                 try {
-                    const result = onFulfilled(this.value);
-                    resolvePromise(result, resolve, reject);
+                    const result = onFulfilled(this.value)
+                    resolvePromise(result, resolve, reject)
                 } catch (e) {
-                    reject(e);
+                    reject(e)
                 }
             }
 
             if (this.state === "rejected") {
                 try {
-                    const result = onRejected(this.reason);
-                    resolvePromise(result, resolve, reject);
+                    const result = onRejected(this.reason)
+                    resolvePromise(result, resolve, reject)
                 } catch (e) {
-                    reject(e);
+                    reject(e)
                 }
             }
 
             if (this.state === "pending") {
                 this.onFulfilledCallback.push((value) => {
                     try {
-                        const result = onFulfilled(value);
-                        resolvePromise(result, resolve, reject);
+                        const result = onFulfilled(value)
+                        resolvePromise(result, resolve, reject)
                     } catch (e) {
-                        reject(e);
+                        reject(e)
                     }
-                });
+                })
 
                 this.onRejectedCallback.push((reason) => {
                     try {
-                        const result = onRejected(reason);
-                        resolvePromise(result, resolve, reject);
+                        const result = onRejected(reason)
+                        resolvePromise(result, resolve, reject)
                     } catch (e) {
-                        reject(e);
+                        reject(e)
                     }
-                });
+                })
             }
-        });
+        })
     }
 
     finally(callback) {
         return this.then(
             () => KenPromise.resolve(callback()),
             () => KenPromise.reject(callback())
-        );
+        )
     }
 }
 
 function resolvePromise(promise, resolve, reject) {
     if (promise instanceof KenPromise) {
-        promise.then(resolve, reject);
+        promise.then(resolve, reject)
     } else {
-        resolve(promise);
+        resolve(promise)
     }
 }

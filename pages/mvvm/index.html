@@ -2,7 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-22 09:25:48
- * @LastEditTime: 2020-10-27 19:38:06
+ * @LastEditTime: 2020-12-04 10:40:10
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -25,22 +25,22 @@
   <script src="./mvvm.js"></script>
   <script>
     const mvvm = new Mvvm({
-      el: "#app",
+      el: '#app',
       data: {
-        mvvm: "mvvm_value",
+        mvvm: 'mvvm_value',
         text_2: {
-          value: "text_2_value",
+          value: 'text_2_value'
         },
         textValue: {
-          value: "v-model_value",
-        },
+          value: 'v-model_value'
+        }
       },
       methods: {
         showModal() {
-          alert("showModal");
-        },
-      },
-    });
-    console.log(mvvm.$data.mvvm);
+          alert('showModal')
+        }
+      }
+    })
+    console.log(mvvm.$data.mvvm)
   </script>
 </html>

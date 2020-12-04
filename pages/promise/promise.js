@@ -2,7 +2,7 @@
  * @Author: Hjm
  * @LastEditors: Hjm
  * @Date: 2020-10-20 09:42:26
- * @LastEditTime: 2020-12-04 10:02:06
+ * @LastEditTime: 2020-12-04 10:41:05
  * @FilePath: \_exercise\promise\promise.js
  */
 
@@ -12,7 +12,7 @@ class KenPromise {
     static resolve(value) {
         if (value instanceof KenPromise) return value
         return new KenPromise(function (resolve, reject) {
-            if (value && value.then && typeof value.then === "function") {
+            if (value && value.then && typeof value.then === 'function') {
                 setTimeout(function () {
                     value.then(resolve, reject)
                 })
@@ -24,7 +24,7 @@ class KenPromise {
 
     static reject(reason) {
         return new KenPromise(function (resolve, reject) {
-            if (reason && reason.then && typeof reason.then === "function") {
+            if (reason && reason.then && typeof reason.then === 'function') {
                 setTimeout(function () {
                     reason.then(resolve, reject)
                 })
@@ -35,7 +35,7 @@ class KenPromise {
     }
 
     static all(promises) {
-        if (!promises || typeof promises[Symbol.iterator] !== "function")
+        if (!promises || typeof promises[Symbol.iterator] !== 'function')
             throw TypeError(
                 `${typeof promises} is not iterable (cannot read property Symbol(Symbol.iterator))`
             )
@@ -65,7 +65,7 @@ class KenPromise {
     }
 
     static race(promises) {
-        if (!promises || typeof promises[Symbol.iterator] !== "function")
+        if (!promises || typeof promises[Symbol.iterator] !== 'function')
             throw TypeError(
                 `${typeof promises} is not iterable (cannot read property Symbol(Symbol.iterator))`
             )
@@ -103,7 +103,7 @@ class KenPromise {
      * 状态
      * @type {"pending"|"fulfilled"|"rejected"}
      */
-    state = "pending"
+    state = 'pending'
 
     /**
      * 异步成功回调
@@ -136,8 +136,8 @@ class KenPromise {
      * @param value {*}
      */
     resolve(value) {
-        if (this.state === "pending") {
-            this.state = "fulfilled"
+        if (this.state === 'pending') {
+            this.state = 'fulfilled'
             this.value = value
 
             this.onFulfilledCallback.forEach((fn) => {
@@ -151,8 +151,8 @@ class KenPromise {
      * @param reason {string}
      */
     reject(reason) {
-        if (this.state === "pending") {
-            this.state = "rejected"
+        if (this.state === 'pending') {
+            this.state = 'rejected'
             this.reason = reason
 
             this.onRejectedCallback.forEach((fn) => {
@@ -163,20 +163,20 @@ class KenPromise {
 
     then(onFulfilled, onRejected) {
         onFulfilled =
-            typeof onFulfilled === "function"
+            typeof onFulfilled === 'function'
                 ? onFulfilled
                 : function (value) {
                       return value
                   }
         onRejected =
-            typeof onRejected === "function"
+            typeof onRejected === 'function'
                 ? onRejected
                 : function (reason) {
                       throw reason
                   }
 
         return new KenPromise((resolve, reject) => {
-            if (this.state === "fulfilled") {
+            if (this.state === 'fulfilled') {
                 try {
                     const result = onFulfilled(this.value)
                     resolvePromise(result, resolve, reject)
@@ -185,7 +185,7 @@ class KenPromise {
                 }
             }
 
-            if (this.state === "rejected") {
+            if (this.state === 'rejected') {
                 try {
                     const result = onRejected(this.reason)
                     resolvePromise(result, resolve, reject)
@@ -194,7 +194,7 @@ class KenPromise {
                 }
             }
 
-            if (this.state === "pending") {
+            if (this.state === 'pending') {
                 this.onFulfilledCallback.push((value) => {
                     try {
                         const result = onFulfilled(value)

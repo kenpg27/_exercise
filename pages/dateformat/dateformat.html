@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+
+    <body></body>
+    <script>
+        /**
+         *
+         * 格式化时间
+         * @class Dateformat
+         *
+         *
+         * @example
+         * //new Dateformat(1485136737263).format("yyyy-MM-dd hh:mm:ss");=>"2017-01-23 09:58:57"
+         *
+         * //new Dateformat().format("yy-M-d h:m:s"); =>"18-8-4 20:29:53"
+         *
+         */
+        class Dateformat extends Date {
+            /**
+             *  时间戳(当前时间时间戳或是给定的时间戳)
+             * @param {number} time
+             * @default new Date().getTime()
+             */
+            constructor(time = new Date().getTime()) {
+                super(time)
+            }
+
+            /**
+             *
+             * @param {string} dateformat
+             * @return {string}
+             */
+            format(dateformat) {
+                let forMat,
+                    o = {
+                        'M+': this.getMonth() + 1,
+                        'd+': this.getDate(),
+                        'h+': this.getHours(),
+                        'm+': this.getMinutes(),
+                        's+': this.getSeconds()
+                    }
+                if (/(y+)/.test(dateformat)) {
+                    forMat = dateformat.replace(
+                        RegExp.$1,
+                        String(this.getFullYear()).slice(4 - RegExp.$1.length)
+                    )
+                }
+                for (let k in o) {
+                    if (new RegExp('(' + k + ')').test(forMat)) {
+                        forMat = forMat.replace(
+                            RegExp.$1,
+                            RegExp.$1.length === 1
+                                ? o[k]
+                                : ('00' + o[k]).slice(String(o[k]).length)
+                        )
+                    }
+                }
+                return forMat
+            }
+        }
+
+        console.log(new Dateformat().format('yyyy-MM-dd hh:mm:ss'))
+    </script>
+</html>

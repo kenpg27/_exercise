@@ -1,0 +1,75 @@
+<!--
+ * @Author: Hjm
+ * @LastEditors: Hjm
+ * @Date: 2020-12-14 17:26:23
+ * @LastEditTime: 2020-12-14 17:26:50
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>nav-bar</title>
+    </head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .hamburger-container {
+            display: block;
+            width: 240px;
+            height: 240px;
+            margin: auto;
+        }
+
+        .hamburger-container span {
+            display: block;
+            height: 40px;
+            background-color: black;
+            position: relative;
+            transition: transform 0.3s ease-in-out, top 0.3s ease-in-out 0.3s, opacity 0.01s linear 0.3s;
+            top: 0;
+            opacity: 1;
+        }
+
+        .hamburger-container span:nth-child(2) {
+            margin: 60px 0;
+        }
+
+        #toggler:checked ~ label .hamburger-container span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 100px;
+            transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
+        }
+
+        #toggler:checked ~ label .hamburger-container span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: -100px;
+            transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
+        }
+
+        #toggler:checked ~ label .hamburger-container span:nth-child(2) {
+            opacity: 0;
+            transition: opacity 0.01s linear 0.3s;
+        }
+
+        #toggler {
+            display: none;
+        }
+    </style>
+    <body>
+        <input type="checkbox" id="toggler" />
+
+        <label for="toggler">
+            <div class="hamburger-container">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </label>
+    </body>
+</html>

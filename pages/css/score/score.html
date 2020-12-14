@@ -1,0 +1,66 @@
+<!--
+ * @Author: Hjm
+ * @LastEditors: Hjm
+ * @Date: 2020-12-14 10:29:30
+ * @LastEditTime: 2020-12-14 16:11:54
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>score指针</title>
+    </head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --deg: 60deg;
+        }
+        .score-box {
+            background-image: url(./img/yibiaopan.png);
+            background-size: 100% 100%;
+            height: 40vw;
+            width: 100vw;
+            position: relative;
+            background-color: lightskyblue;
+        }
+        .score-box img {
+            width: 7vw;
+            height: 25vw;
+            position: absolute;
+            left: 45vw;
+            bottom: -9vw;
+            transform: rotateZ(-90deg) translateY(-9vw);
+        }
+        .rotate-class {
+            transform: translateY(-9vw);
+            animation: rotate 1s forwards linear;
+            transition: 0.3s animation ease-out;
+        }
+        @keyframes rotate {
+            from {
+                transform: rotateZ(-90deg) translateY(-9vw);
+            }
+
+            to {
+                transform: rotateZ(var(--deg)) translateY(-9vw);
+            }
+        }
+    </style>
+    <body>
+        <div class="score-box">
+            <img class="score-box-zhen" src="./img/zhen.png" alt="" srcset="" />
+        </div>
+    </body>
+    <script>
+        // 动态修改deg
+        setTimeout(() => {
+            document.documentElement.style.setProperty('--deg', '80deg')
+            let zhen = document.querySelector('.score-box-zhen')
+            zhen.classList.add('rotate-class')
+        }, 600)
+    </script>
+</html>

@@ -1,0 +1,41 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-12-06 18:17:04
+ * @LastEditTime: 2020-12-06 18:25:03
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \_exercise\pages\css进阶\css3.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>css3</title>
+    </head>
+    <style>
+        /* 可以看到正方形包含4各区域，为三角形，例如transparent设置透明度达到三角形的图案 */
+        #triangle {
+            position: relative;
+            width: 0;
+            height: 0;
+            border: 50px solid green;
+            border-top-color: black;
+            border-left-color: red;
+            border-right-color: yellow;
+            border-bottom-color: gray;
+        }
+        #triangle-up {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 100px solid red;
+        }
+    </style>
+    <body>
+        <!-- 三角形 -->
+        <div id="triangle"></div>
+        <div id="triangle-up"></div>
+    </body>
+</html>

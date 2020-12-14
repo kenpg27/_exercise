@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手写实现new函数</title>
+  </head>
+  <body></body>
+  <script>
+    function Person(name) {
+      this.name = name;
+    }
+    // 手写实现 new  了解 new Object() 到底做了哪些操作
+    // 1、新生成了一个对象
+    // 2、链接到原型
+    // 3、绑定 this
+    // 4、返回新对象
+    function create() {
+      // 创建一个新对象obj
+      let obj = new Object();
+      // 取参数的第一项为构造函数fn,这里可以写(arguments,1)也可以直接(arguments)，都是代表参数的第一项，取构造函数
+      let fn = [].shift.call(arguments);
+      // 将obj.__proto__连接到构造函数fn的原型
+      obj.__proto__ = fn.prototype;
+      // result接收构造函数执行后的返回结果
+      let result = fn.apply(obj, arguments);
+      // 如果构造函数返回一个对象，则将该对象返回，否则返回步骤1创建的对象
+      return typeof result === "object" ? result : obj;
+    }
+
+    let t = create(Person, "小明");
+    console.log(t);
+  </script>
+</html>

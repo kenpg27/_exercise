@@ -1,0 +1,52 @@
+<!--
+ * @Author: Hjm
+ * @LastEditors: Hjm
+ * @Date: 2020-12-17 14:14:16
+ * @LastEditTime: 2020-12-17 15:52:46
+-->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>时间格式化</title>
+    </head>
+    <body></body>
+    <script>
+        class TimeFormat extends Date {
+            constructor(timeStr = new Date().getTime(), format = 'yyyy-mm-dd') {
+                super(timeStr)
+            }
+            format(dateformat) {
+                let that = this
+                let regObj = {
+                    'm+': this.getMonth() + 1,
+                    'd+': this.getDate(),
+                    'h+': this.getHours(),
+                    'i+': this.getMinutes(),
+                    's+': this.getSeconds()
+                }
+                let formatTime
+                let reg = /y+/gi
+                formatTime = dateformat.replace(reg, (res) =>
+                    this.getFullYear()
+                        .toString()
+                        .slice(4 - res.length)
+                )
+                // 接下来处理mdhis
+                for (const key in regObj) {
+                    let reg = new RegExp(key, 'ig')
+                    formatTime = formatTime.replace(reg, (res) => {
+                        return res.length == 1 ? regObj[key] : ('00' + regObj[key]).slice(String(regObj[key]).length)
+                    })
+                }
+                console.log(formatTime)
+                return formatTime
+            }
+        }
+        let timeStr = new Date().getTime()
+        console.log(timeStr)
+        let format = new TimeFormat(timeStr).format('yyyy/MM/dd hh:mm:ss')
+        console.log(format)
+    </script>
+</html>

@@ -1,8 +1,8 @@
 <!--
  * @Author: your name
  * @Date: 2020-12-06 18:17:04
- * @LastEditTime: 2020-12-06 18:25:03
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2020-12-21 11:14:03
+ * @LastEditors: Hjm
  * @Description: In User Settings Edit
  * @FilePath: \_exercise\pages\css进阶\css3.html
 -->
@@ -19,23 +19,76 @@
             position: relative;
             width: 0;
             height: 0;
-            border: 50px solid green;
-            border-top-color: black;
-            border-left-color: red;
-            border-right-color: yellow;
-            border-bottom-color: gray;
+            border: 50px solid #eee;
+            border-top-color: lightgreen;
+            border-left-color: lavender;
+            border-right-color: lightpink;
+            border-bottom-color: lemonchiffon;
         }
         #triangle-up {
             width: 0;
             height: 0;
             border-left: 50px solid transparent;
             border-right: 50px solid transparent;
-            border-bottom: 100px solid red;
+            border-bottom: 100px solid #eee;
+        }
+        .floating-button {
+            right: 5%;
+            bottom: 90px;
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-image: linear-gradient(45deg, rgb(91, 157, 249), rgb(71, 191, 255));
+            border: none;
+            outline: none;
+            transition: all 0.5s ease;
+            animation: show 1s ease forwards;
+            transform: scale(0);
+        }
+        @keyframes show {
+            to {
+                transform: scale(1);
+            }
+        }
+        /* 通过伪类制作符号 */
+        .floating-button::before,
+        .floating-button::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background-color: #fff;
+            transform: translate(-50%, -50%);
+        }
+        .floating-button::after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+        .down-button {
+            width: 90%;
+            right: 5%;
+            bottom: 15px;
+            border-radius: 5px;
         }
     </style>
     <body>
         <!-- 三角形 -->
         <div id="triangle"></div>
         <div id="triangle-up"></div>
+        <!-- 转变的按钮 -->
+        <button onclick="btnClick()" class="floating-button"></button>
     </body>
+    <script>
+        let isFloating = false
+        function btnClick() {
+            let btn = document.querySelector('.floating-button')
+            if (!isFloating) {
+                btn.classList.add('down-button')
+                isFloating = true
+            } else {
+                isFloating = false
+                btn.classList.remove('down-button')
+            }
+        }
+    </script>
 </html>
